@@ -6,15 +6,15 @@ using namespace std;
 #define DYNAMIC_MEMORY
 
 bool _if_even(int&);
-void _print_array(const int*, const int&, const char*);
-int* push_back(int*, int&, int&);
-int* push_front(int*, int&, int&);
-int* insert(int*, int&, int, int&);
-int* pop_back(int*, int&);
-int* pop_front(int*, int&);
-int* erase(int*, int, int&);
-int _call_menu(int*, int&);
-int* _operation(int*, int& size, int&);
+template<typename T> void _print_array(const T*, const int&, const char*);
+template<typename T> T* push_back(T*, T&, int&);
+template<typename T> T* push_front(T*, T&, int&);
+template<typename T> T* insert(T*, T&, int, int&);
+template<typename T> T* erase(T*, int, int&);
+template<typename T> T* pop_back(T*, int&);
+template<typename T> T* pop_front(T*, int&);
+template<typename T> int _call_menu(T*, const int&);
+template<typename T> T* _operation(T*, int&, int&);
 
 int main()
 {
@@ -44,14 +44,14 @@ int main()
 #endif //  EVEN_ODD
 
 #ifdef DYNAMIC_MEMORY
-	int* array = nullptr;
+	int* _array = nullptr;
 	int size = 0;
 	int key;
-	while ((key = _call_menu(array, size)) != 27)
+	while ((key = _call_menu(_array, size)) != 27)
 	{
-		array = _operation(array, size, key);
+		_array = _operation(_array, size, key);
 	}
-	delete[]array;
+	delete[]_array;
 #endif // DYNAMIC_MEMORY
 	return 0;
 }
@@ -60,71 +60,79 @@ bool _if_even(int& number)
 {
 	return (number % 2 == 0);
 }
-void _print_array(const int* array, const int& size, const char* _string)
-{
+
+template<typename T>
+void _print_array(const T* _array, const int& size, const char* _string) {
 	cout << "\n " << _string << " -> ";
 	if (size == 0) cout << "empty";
 	else
 		for (int i = 0; i < size; ++i)
-			cout << array[i] << "  ";
+			cout << _array[i] << "  ";
 }
-int* push_back(int* array, int& value, int& size)
-{
-	return insert(array, value, size, size);
+
+template<typename T>
+T* push_back(T* _array, T& value, int& size) {
+	return insert(_array, value, size, size);
 }
-int* push_front(int* array, int& value, int& size)
-{
-	return	insert(array, value, 0, size);
+
+template<typename T>
+T* push_front(T* _array, T& value, int& size) {
+	return	insert(_array, value, 0, size);
 }
-int* insert(int* array, int& value, int position, int& size)
-{
+
+template<typename T>
+T* insert(T* _array, T& value, int position, int& size) {
 	if (position <= size)
 	{
 		int* temp = new int[++size];
 		for (int i = 0; i < position; ++i)
 		{
-			temp[i] = array[i];
+			temp[i] = _array[i];
 		}
 		temp[position] = value;
 		for (int i = position + 1; i < size; ++i)
 		{
-			temp[i] = array[i - 1];
+			temp[i] = _array[i - 1];
 		}
-		delete[]array;
+		delete[]_array;
 		return temp;
 	}
-	else return array;
+	else return _array;
 }
-int* erase(int* array, int position, int& size)
-{
+
+template<typename T>
+T* erase(T* _array, int position, int& size) {
 	if ((size != 0) && (position < size))
 	{
 		int* temp = new int[--size];
 		for (int i = 0; i < position; i++)
 		{
-			temp[i] = array[i];
+			temp[i] = _array[i];
 		}
 		for (int i = position; i < size; i++)
 		{
-			temp[i] = array[i + 1];
+			temp[i] = _array[i + 1];
 		}
-		delete[]array;
-		array = temp;
+		delete[]_array;
+		_array = temp;
 	}
-	return array;
+	return _array;
 }
-int* pop_back(int* array, int& size)
-{
-	return erase(array, size - 1, size);
+
+template<typename T>
+T* pop_back(T* _array, int& size) {
+	return erase(_array, size - 1, size);
 }
-int* pop_front(int* array, int& size)
-{
-	return erase(array, 0, size);
+
+template<typename T>
+T* pop_front(T* _array, int& size) {
+	return erase(_array, 0, size);
 }
-int _call_menu(int* array, int& size)
-{
+
+template<typename T>
+int _call_menu(T* _array, const int& size) {
 	system("cls");
-	_print_array(array, size, "Now your array is");
+	_print_array(_array, size, "Now your array is");
 	cout << "\n Choose an operation:";
 	cout << "\n 1. Push_back";
 	cout << "\n 2. Push_front";
@@ -135,44 +143,45 @@ int _call_menu(int* array, int& size)
 	cout << "\n ESC to quit ";
 	return _getch();
 }
-int* _operation(int* array, int& size, int& key)
-{
+
+template<typename T>
+T* _operation(T* _array, int& size, int& key) {
 	int value = 0, position = 0;
 	switch (key)
 	{
 	case '1':
 	{
 		cout << "\n Enter a value to push back -> "; cin >> value;
-		array = push_back(array, value, size);
+		_array = push_back(_array, value, size);
 		break;
 	}
 	case '2':
 	{
 		cout << "\n Enter a value to push front -> "; cin >> value;
-		array = push_front(array, value, size);
+		_array = push_front(_array, value, size);
 		break;
 	}
 	case '3':
 	{
 		cout << "\n Enter a value to insert -> "; cin >> value;
 		cout << "\n Enter a position -> "; cin >> position;
-		array = insert(array, value, position, size);
+		_array = insert(_array, value, position, size);
 		break;
 	}
 	case '4':
 	{
-		array = pop_back(array, size);
+		_array = pop_back(_array, size);
 		break;
 	}
 	case '5':
 	{
-		array = pop_front(array, size);
+		_array = pop_front(_array, size);
 		break;
 	}
 	case '6':
 	{
 		cout << "\n Enter a position -> "; cin >> position;
-		array = erase(array, position, size);
+		_array = erase(_array, position, size);
 		break;
 	}
 	case 27:
@@ -183,5 +192,5 @@ int* _operation(int* array, int& size, int& key)
 		break;
 	}
 	}
-	return array;
+	return _array;
 }
