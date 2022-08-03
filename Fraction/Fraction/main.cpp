@@ -22,11 +22,11 @@ public:
 		this->denominator = other.denominator;
 		this->integral = other.integral;
 	}
-	int getNumerator()
+	const int getNumerator()
 	{
 		return numerator;
 	}
-	int getDenominator()
+	const int getDenominator()
 	{
 		return denominator;
 	}
@@ -35,6 +35,12 @@ public:
 	}
 	void setDenominator(int denominator) {
 		this->denominator = denominator;
+	}
+	Fraction& operator=(const Fraction& other) {
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		this->integral = other.integral;
+		return *this;
 	}
 	Fraction operator+(const Fraction& other) {
 		Fraction result;
@@ -60,11 +66,20 @@ public:
 		result.setDenominator(this->denominator * other.numerator);
 		return result;
 	}
-	Fraction& shorten() {
+	Fraction& operator++() {
+		this->numerator += this->denominator;
+		return *this;
+	}
+	Fraction operator++(int) {
+		Fraction oldFraction = *this;
+		this->numerator += this->denominator;
+		return oldFraction;
+	}
+	void shorten() {
 		if (this->numerator == this->denominator) {
 			this->integral = 1;
 			this->numerator = 0;
-			return *this;
+			return;
 		}
 		if (this->numerator > this->denominator) {
 			this->integral = this->numerator / this->denominator;
@@ -72,7 +87,35 @@ public:
 		}
 		EuclidAlgorighm();
 	}
-	
+	bool operator==(Fraction& other) {
+		if (this->numerator * other.denominator == this->denominator * other.numerator)
+			return true;
+		return false;
+	}
+	bool operator!=(Fraction& other) {
+		return !(*this == other);
+	}
+	bool operator>(Fraction& other) {
+		if (this->numerator * other.denominator > this->denominator * other.numerator)
+			return true;
+		return false;
+	}
+	bool operator<(Fraction& other) {
+		return !(*this > other);
+	}
+	void print() {
+		if (this->denominator < 0) {
+			this->denominator *= -1;
+			this->numerator *= -1;
+		}
+		if (this->integral != 0) {
+			if (this->numerator < 0) cout << "-";
+			cout << this->integral;
+			this->numerator = abs(this->numerator);
+		}
+		cout << "[" << this->numerator << "/" << this->denominator << "]" << endl;
+	}
+
 private:
 	int numerator;
 	int denominator;
@@ -92,7 +135,29 @@ private:
 	}
 };
 
+
 int main() {
+	Fraction A;
+	A.setNumerator(21);
+	A.setDenominator(84);
+	Fraction B(49,133);
+	Fraction C = A + B;
+	Fraction D = A - B;
+	Fraction E = A * B;
+	Fraction F = A / B;
+	Fraction G = A++;
+	Fraction H = ++B;
+	cout << "A = "; A.print(); A.shorten(); cout << "--->"; A.print(); cout << endl;
+	cout << "B = "; B.print(); B.shorten(); cout << "--->"; B.print(); cout << endl;
+	cout << "C = "; C.print(); C.shorten(); cout << "--->"; C.print(); cout << endl;
+	cout << "D = "; D.print(); D.shorten(); cout << "--->"; D.print(); cout << endl;
+	cout << "E = "; E.print(); E.shorten(); cout << "--->"; E.print(); cout << endl;
+	cout << "F = "; F.print(); F.shorten(); cout << "--->"; F.print(); cout << endl;
+	cout << "G = "; G.print(); G.shorten(); cout << "--->"; G.print(); cout << endl;
+	cout << "H = "; H.print(); H.shorten(); cout << "--->"; H.print(); cout << endl;
+	cout << "D < E" << ((D < E) ? " true" : " false") << endl;
+	cout << "G > C" << ((G > C) ? " true" : " false") << endl;
+	
 	return 0;
 
 }
