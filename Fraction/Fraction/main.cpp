@@ -34,7 +34,7 @@ public:
 		this->numerator = numerator;
 	}
 	void setDenominator(int denominator) {
-		this->denominator = denominator;
+		if (denominator!=0)	this->denominator = denominator;
 	}
 	Fraction& operator=(const Fraction& other) {
 		this->numerator = other.numerator;
