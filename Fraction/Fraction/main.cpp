@@ -178,7 +178,7 @@ int main() {
 
 	Fraction A;					// calling default constructor
 	A.setNumerator(21);			// calling setter for numerator
-	A.setDenominator(84);	// calling setter for denominator
+	A.setDenominator(84);			// calling setter for denominator
 	Fraction B(49,133);			// calling constructor with parameters
 	Fraction C = A + B;			// calling copy constructor after getting result of '+'
 	Fraction D = A - B;			// calling copy constructor after getting result of '-'
