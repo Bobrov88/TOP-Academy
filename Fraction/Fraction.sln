@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fraction.vcxproj", "{5586D3B7-8B2D-49FB-95B5-9B79807C6ED2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Teams29082022", "..\Teams29082022\Teams29082022.vcxproj", "{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{5586D3B7-8B2D-49FB-95B5-9B79807C6ED2}.Release|x64.Build.0 = Release|x64
 		{5586D3B7-8B2D-49FB-95B5-9B79807C6ED2}.Release|x86.ActiveCfg = Release|Win32
 		{5586D3B7-8B2D-49FB-95B5-9B79807C6ED2}.Release|x86.Build.0 = Release|Win32
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Debug|x64.ActiveCfg = Debug|x64
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Debug|x64.Build.0 = Debug|x64
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Debug|x86.ActiveCfg = Debug|Win32
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Debug|x86.Build.0 = Debug|Win32
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Release|x64.ActiveCfg = Release|x64
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Release|x64.Build.0 = Release|x64
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Release|x86.ActiveCfg = Release|Win32
+		{E859AB4C-3406-4FAB-B5C1-5AAF3C138519}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
