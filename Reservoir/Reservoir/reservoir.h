@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+constexpr auto KOEFF = 0.7;
 
 class Reservoir {
 	std::string name;

@@ -108,29 +108,48 @@ bool Reservoir::getWaterMovable() const
 
 std::string Reservoir::defineType() const
 {
-	return std::string();
+	if (isWaterMoving) {
+		if (width <= 2.0) return "Creek\n";
+		else return "River\n";
+	}
+	if ((depth < 0.5) && (width < 2.0) && (length < 3.0)) return "Puddle\n";
+	if (depth < 0.5 && (width > 2.0 && width < 4.0) && (length > 2.0 && length < 4.0)) return "Pond\n";
+	if ((depth > 0.5 && depth < 2.5) && (width > 2.0 && width < 10.0) && (length > 3.0 && length < 10.0)) return "Pool\n";
+	if ((depth > 2.5 && depth < 50.0) && (width > 10.0 && width < 3000.0) && (length > 10.0 && length < 3000.0)) return "Sea\n";
+	if (depth > 50.0 && width > 3000.0 && length > 3000.0) return "Ocean\n";
+	return "Type not defined\n";
 }
 
 double Reservoir::getVolume() const
 {
-	return 0.0;
+	return width * depth * length * KOEFF;
 }
 
 double Reservoir::getSurfaceSquare() const
 {
-	return 0.0;
+	return width * length;
 }
 
-bool Reservoir::isSurfaceTheSame(const Reservoir&) const
+bool Reservoir::isSurfaceTheSame(const Reservoir& other) const
 {
-	return false;
+	return this->getSurfaceSquare() == other.getSurfaceSquare();
 }
 
-Reservoir& Reservoir::operator=(const Reservoir&)
+Reservoir& Reservoir::operator=(const Reservoir& other)
 {
-	// // O: insert return statement here
+	this->name = other.name;
+	this->depth = other.depth;
+	this->width = other.width;
+	this->length = other.length;
+	this->isWaterMoving = other.isWaterMoving;
+	return *this;
 }
 
 Reservoir::~Reservoir()
 {
+	this->name = "";
+	this->depth = 0;
+	this->width = 0;
+	this->length = 0;
+	this->isWaterMoving = false;
 }
