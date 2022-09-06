@@ -1,4 +1,4 @@
-﻿#include "reservoir.h"
+﻿#include "includes.h"
 
 Reservoir::Reservoir() : 
 	name {"Noname"},
@@ -7,7 +7,7 @@ Reservoir::Reservoir() :
 	length {0},
 	isWaterMoving {false} {}
 
-explicit Reservoir::Reservoir(std::string& _name) :
+Reservoir::Reservoir(std::string& _name) :
 	name { _name },
 	depth{ 2.0 },
 	width{ 5.5 },
