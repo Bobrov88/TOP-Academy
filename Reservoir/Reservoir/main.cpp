@@ -1,5 +1,3 @@
-//#include "includes.h"
-
 #include <iostream>
 #include <string>
 constexpr auto KOEFF{ 0.7 };
