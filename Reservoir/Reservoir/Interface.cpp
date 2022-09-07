@@ -2,7 +2,7 @@
 
 Interface::Interface(int&& _size) noexcept : _arr{ new Reservoir[_size] }, size{ _size } {
 	for (int i{ 0 }; i < _size; ++i) {
-		int tempValue{ 0 };
+		double tempValue{ 0 };
 		std::string tempString{ };
 		std::cout << "Name: ";	std::cin >> tempString;  _arr[i].setName(tempString);
 		std::cout << "Width: "; std::cin >> tempValue;  _arr[i].setWidth(tempValue);
@@ -10,7 +10,7 @@ Interface::Interface(int&& _size) noexcept : _arr{ new Reservoir[_size] }, size{
 		std::cout << "Depth ";	std::cin >> tempValue;  _arr[i].setDepth(tempValue);
 		do {
 			std::cout << "Is water moving: Yes - 1, No - 0 "; std::cin >> tempValue;
-		} while ((tempValue != 0) && (tempValue != 1));
+		} while ((int)tempValue != 0 && (int)tempValue != 1);
 		_arr[i].setWaterMovable(tempValue);
 	}
 }
