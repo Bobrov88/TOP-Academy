@@ -116,7 +116,7 @@ void Fraction::SquareRoot() {
 
 void Fraction::reduction() {
 	if (abs(this->numerator) == abs(this->denominator)) {
-		this->integral = 1;
+		this->integral = this->numerator / this->denominator;
 		this->numerator = 0;
 		return;
 	}
