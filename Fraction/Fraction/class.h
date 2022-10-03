@@ -29,12 +29,12 @@ public:
 	bool operator<(const Fraction&) const;
 	bool operator>=(const Fraction&) const;
 	bool operator<=(const Fraction&) const;
-	void print();
+	void print() const;
 
 private:
 	int numerator;
 	int denominator;
 	int integral;
 	void EuclidAlgorighm();
-	void _preprint();
+//	void _preprint();
 };

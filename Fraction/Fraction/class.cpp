@@ -115,14 +115,16 @@ void Fraction::SquareRoot() {
 }
 
 void Fraction::reduction() {
-	if (this->numerator == this->denominator) {
+	if (abs(this->numerator) == abs(this->denominator)) {
 		this->integral = 1;
 		this->numerator = 0;
 		return;
 	}
-	if (this->numerator > this->denominator) {
+	if (abs(this->numerator) > abs(this->denominator)) {
 		this->integral = this->numerator / this->denominator;
 		this->numerator %= this->denominator;
+		this->numerator = abs(this->numerator);
+		this->denominator = abs(this->denominator);
 	}
 	EuclidAlgorighm();
 }
@@ -161,8 +163,8 @@ bool Fraction::operator<=(const Fraction& other) const {
 	return false;
 }
 
-void Fraction::print() {
-	_preprint();
+void Fraction::print() const {
+//	_preprint();
 	if (this->integral) cout << this->integral;
 	cout << "[" << this->numerator << "/" << this->denominator << "]" << endl;
 }
@@ -180,14 +182,16 @@ void Fraction::EuclidAlgorighm() {
 	this->denominator /= numerator;
 }
 
-void Fraction::_preprint() {
-	if (this->denominator < 0) {
-		this->denominator *= -1;
-		this->numerator *= -1;
-	}
-	if (this->integral != 0) {
-		if (this->numerator < 0)
-			this->integral *= -1;
-		this->numerator = abs(this->numerator);
-	}
-}
+//void Fraction::_preprint() {
+//	if (this->denominator < 0) {
+//		this->denominator *= -1;
+//		this->numerator *= -1;
+//	}
+//	if (this->integral != 0) {
+//		if (this->numerator < 0) {
+//			this->integral *= -1;
+//			this->numerator *= -1;
+//		}
+//		this->numerator = abs(this->numerator);
+//	}
+//}
