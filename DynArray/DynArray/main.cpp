@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 class DynArray
 {
@@ -23,7 +23,7 @@ public:
 		object.size = 0;
 		cout << "DynArr move constructed for " << size << " elments, for " << this << '\n';
 	}
-	DynArray& operator=(DynArray&& object) noexcept//êîíñòðóêòîð ïåðåíîñà
+	DynArray& operator=(DynArray&& object) noexcept//ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿ÐµÑ€ÐµÐ½Ð¾ÑÐ°
 	{
 		if (!(this == &object))
 		{
@@ -36,29 +36,29 @@ public:
 		cout << "DynArr move assigned for " << size << " elments, for " << this << '\n';
 		return *this;
 	}
-	int getElem(int idx)const { return arr[idx]; }//ïðèñâîåíèå çíà÷åíèÿ ïî èíäåêñó
-	void setElem(int idx, int val) { arr[idx] = val; }//ïîëó÷åíèå çíà÷åíèÿ ýëåìåíòà ìàññèâà ïî èíäåêñó
+	int getElem(int idx)const { return arr[idx]; }//Ð¿Ñ€Ð¸ÑÐ²Ð¾ÐµÐ½Ð¸Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¿Ð¾ Ð¸Ð½Ð´ÐµÐºÑÑƒ
+	void setElem(int idx, int val) { arr[idx] = val; }//Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð¿Ð¾ Ð¸Ð½Ð´ÐµÐºÑÑƒ
 	void print()const;
 	void randomize();
-	~DynArray()//äåñòðóêòîð
+	~DynArray()//Ð´ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
 	{
 		cout << "Try to free memory from DynArray for " << arr << " pointer\n";
 		delete[] arr;
 		cout << "DynArr destructed for " << size << " elments, for " << this << '\n';
 	}
 };
-void DynArray::print()const//ìåòîä âûâîäà çíà÷åíèé õðàíÿùèõñÿ â ìàññèâå â êîíñîëü
+void DynArray::print()const//Ð¼ÐµÑ‚Ð¾Ð´ Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹ Ñ…Ñ€Ð°Ð½ÑÑ‰Ð¸Ñ…ÑÑ Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ
 {
 	for (int i = 0; i < size; i++)
 		cout << arr[i] << ' ';
 	cout << '\n';
 }
-void DynArray::randomize()//ìåòîä çàïîëíåíèÿ ìàññèâà ñëó÷àéíûìè ÷èñëàìè
+void DynArray::randomize()//Ð¼ÐµÑ‚Ð¾Ð´ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ð¼Ð¸ Ñ‡Ð¸ÑÐ»Ð°Ð¼Ð¸
 {
 	for (int i = 0; i < size; i++)
 		arr[i] = rand() % 10;
 }
-DynArray arrayFactory(int arrSize)//ìåòîä ñîçäàíèå îáúåêòà êëàññà è åãî íà÷àëüíàÿ èíèöèàëèçàöèÿ
+DynArray arrayFactory(int arrSize)//Ð¼ÐµÑ‚Ð¾Ð´ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÐºÐ»Ð°ÑÑÐ° Ð¸ ÐµÐ³Ð¾ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð°Ñ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ
 {
 	DynArray arr{ arrSize };
 	arr.randomize();
@@ -69,12 +69,12 @@ int main()
 	DynArray ar1{ arrayFactory(10) };
 	cout << "ar1 elements: ";
 	ar1.print();
-	// DynArray ar2{ ar1 }; - çäåñü áûëà îøèáêà, ïðè÷èíà - óäàë¸ííûé êîíòðóêòîð êîïèðîâàíèÿ
-	// ïåðâûé âàðèàíò èñïðàâëåíèÿ - ïåðåäàòü ïàðàìåòð ar1 êàê rvalue&, ïðåîáðàçîâàâ ìåòîäîì move
-	// ïðè ýòî äàííûé ar1 ïðîïàäóò, è ýòî áóäåò áîëüøå ïåðåìåùåíèåì, ÷åì êîïèðîâàíèÿ
+	// DynArray ar2{ ar1 }; - Ð·Ð´ÐµÑÑŒ Ð±Ñ‹Ð»Ð° Ð¾ÑˆÐ¸Ð±ÐºÐ°, Ð¿Ñ€Ð¸Ñ‡Ð¸Ð½Ð° - ÑƒÐ´Ð°Ð»Ñ‘Ð½Ð½Ñ‹Ð¹ ÐºÐ¾Ð½Ñ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
+	// Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚ Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ - Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‚ÑŒ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ ar1 ÐºÐ°Ðº rvalue&, Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð² Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð¼ move
+	// Ð¿Ñ€Ð¸ ÑÑ‚Ð¾ Ð´Ð°Ð½Ð½Ñ‹Ð¹ ar1 Ð¿Ñ€Ð¾Ð¿Ð°Ð´ÑƒÑ‚, Ð¸ ÑÑ‚Ð¾ Ð±ÑƒÐ´ÐµÑ‚ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÑ‰ÐµÐ½Ð¸ÐµÐ¼, Ñ‡ÐµÐ¼ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
 
-	// Âòîðîé âàðèàíò èñïðàâëåíèÿ - ðåàëèçîâàòü êîíòðóêòîð êîïèðîâàíèÿ
-	// Ðåàçëèçàöèÿ âûøå â êëàññå
+	// Ð’Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚ Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ - Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ¾Ð½Ñ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
+	// Ð ÐµÐ°Ð·Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð²Ñ‹ÑˆÐµ Ð² ÐºÐ»Ð°ÑÑÐµ
 
 	DynArray ar2{ move(ar1) };
 	cout << "ar2 elements: ";
