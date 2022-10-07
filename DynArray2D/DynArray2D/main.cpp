@@ -7,7 +7,6 @@ class Array2D {
 	size_t rows;
 	size_t cols;
 	T** arr;
-//	static size_t number_of_elements;
 public:
 	Array2D() = default;										// default constructor
 	Array2D(size_t) = delete;									// deleted constructor with one parameter
@@ -35,6 +34,7 @@ public:
 //====================================================
 
 int main() {
+
 	Array2D<int> A(3, 4);
 	A.print();
 	cout << BORDER;
