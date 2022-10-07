@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+constexpr auto EPS{ 0.0000001 };
 using namespace std;
 
 class Fraction {
@@ -7,12 +8,15 @@ class Fraction {
 public:
 	Fraction();
 	explicit Fraction(int);
-	Fraction(int, int);
+	explicit Fraction(float);
+	explicit Fraction(double);
+	explicit Fraction(long);
+	Fraction(long, long);
 	Fraction(const Fraction&);
 	const int getNumerator();
 	const int getDenominator();
-	void setNumerator(int);
-	void setDenominator(int);
+	void setNumerator(long);
+	void setDenominator(long);
 	Fraction& operator=(const Fraction&);
 	Fraction operator+(const Fraction&);
 	Fraction operator-(const Fraction&);
@@ -32,9 +36,9 @@ public:
 	void print() const;
 
 private:
-	int numerator;
-	int denominator;
-	int integral;
+	long numerator;
+	long denominator;
+	long integral;
 	void EuclidAlgorighm();
 //	void _preprint();
 };

@@ -11,7 +11,27 @@ Fraction::Fraction(int numerator) : Fraction() {
 	this->numerator = numerator;
 }
 
-Fraction::Fraction(int numerator, int denominator) {
+Fraction::Fraction(float f) : Fraction () {
+	while (f - (size_t)f > EPS) {
+		f *= 10;
+		denominator *= 10;
+	}
+	numerator = (long)f;
+}
+
+Fraction::Fraction(double d) : Fraction() {
+	while (d - (size_t)d > EPS) {
+		d *= 10;
+		denominator *= 10;
+	}
+	numerator = (long)d;
+}
+
+Fraction::Fraction(long l) :Fraction() {
+	numerator = l;
+}
+
+Fraction::Fraction(long numerator, long denominator) {
 	this->numerator = numerator;
 	this->denominator = denominator;
 	this->integral = 0;
@@ -33,11 +53,11 @@ const int Fraction::getDenominator()
 	return denominator;
 }
 
-void Fraction::setNumerator(int numerator) {
+void Fraction::setNumerator(long numerator) {
 	this->numerator = numerator;
 }
 
-void Fraction::setDenominator(int denominator) {
+void Fraction::setDenominator(long denominator) {
 	if (denominator != 0)	this->denominator = denominator;
 }
 
@@ -126,7 +146,7 @@ void Fraction::reduction() {
 		this->numerator = abs(this->numerator);
 		this->denominator = abs(this->denominator);
 	}
-	EuclidAlgorighm();
+	if (this->numerator) EuclidAlgorighm();
 }
 
 bool Fraction::operator==(const Fraction& other) const {
@@ -166,13 +186,17 @@ bool Fraction::operator<=(const Fraction& other) const {
 void Fraction::print() const {
 //	_preprint();
 	if (this->integral) cout << this->integral;
-	cout << "[" << this->numerator << "/" << this->denominator << "]" << endl;
+	if (this->numerator)
+		cout << "[" << this->numerator
+		<< "/" << this->denominator
+		<< "]" << endl;
+	else if (!this->integral) cout << '0';
 }
 
 void Fraction::EuclidAlgorighm() {
-	int numerator = this->numerator;
-	int denominator = this->denominator;
-	int remainder = this->denominator % this->numerator;
+	long numerator = this->numerator;
+	long denominator = this->denominator;
+	long remainder = this->denominator % this->numerator;
 	while (remainder != 0) {
 		denominator = numerator;
 		numerator = remainder;
