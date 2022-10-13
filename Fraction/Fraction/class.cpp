@@ -183,6 +183,51 @@ bool Fraction::operator<=(const Fraction& other) const {
 	return false;
 }
 
+bool Fraction::operator==(int _num) const { return *this == Fraction{ _num }; }
+bool Fraction::operator==(float _num) const { return *this == Fraction{ _num }; }
+bool Fraction::operator==(double _num) const { return *this == Fraction{ _num }; }
+bool Fraction::operator==(long _num) const { return *this == Fraction{ _num }; }
+bool Fraction::operator!=(int _num) const { return *this != Fraction{ _num }; }
+bool Fraction::operator!=(float _num) const { return *this != Fraction{ _num }; }
+bool Fraction::operator!=(double _num) const { return *this != Fraction{ _num }; }
+bool Fraction::operator!=(long _num) const { return *this != Fraction{ _num }; }
+bool Fraction::operator>(int _num) const { return *this > Fraction{ _num }; }
+bool Fraction::operator>(float _num) const { return *this > Fraction{ _num }; }
+bool Fraction::operator>(double _num) const { return *this > Fraction{ _num }; }
+bool Fraction::operator>(long _num) const { return *this > Fraction{ _num }; }
+bool Fraction::operator<(int _num) const { return *this < Fraction{ _num }; }
+bool Fraction::operator<(float _num) const { return *this < Fraction{ _num }; }
+bool Fraction::operator<(double _num) const { return *this < Fraction{ _num }; }
+bool Fraction::operator<(long _num) const { return *this < Fraction{ _num }; }
+bool Fraction::operator>=(float _num) const { return *this >= Fraction{ _num }; }
+bool Fraction::operator>=(double _num) const { return *this >= Fraction{ _num }; }
+bool Fraction::operator>=(long _num) const { return *this >= Fraction{ _num }; }
+bool Fraction::operator>=(int _num) const { return *this >= Fraction{ _num }; }
+bool Fraction::operator<=(int _num) const { return *this <= Fraction{ _num }; }
+bool Fraction::operator<=(float _num) const { return *this <= Fraction{ _num }; }
+bool Fraction::operator<=(double _num) const { return *this <= Fraction{ _num }; }
+bool Fraction::operator<=(long _num) const { return *this <= Fraction{ _num }; }
+
+Fraction Fraction::operator+(int _num) { return *this + Fraction{ _num }; }
+Fraction Fraction::operator-(int _num) { return *this - Fraction{ _num }; }
+Fraction Fraction::operator*(int _num) { return *this * Fraction{ _num }; }
+Fraction Fraction::operator/(int _num) { if (_num) return *this + Fraction{_num}; else throw("Dividing by 0!");}
+
+Fraction Fraction::operator+(float _num) { return *this + Fraction{ _num }; }
+Fraction Fraction::operator-(float _num) { return *this - Fraction{ _num }; }
+Fraction Fraction::operator*(float _num) { return *this * Fraction{ _num }; }
+Fraction Fraction::operator/(float _num) { if (_num) return *this + Fraction{ _num }; else throw("Dividing by 0!");}
+
+Fraction Fraction::operator+(double _num) { return *this + Fraction{ _num }; }
+Fraction Fraction::operator-(double _num) { return *this - Fraction{ _num }; }
+Fraction Fraction::operator*(double _num) { return *this * Fraction{ _num }; }
+Fraction Fraction::operator/(double _num) { if (_num) return *this + Fraction{ _num }; else throw("Dividing by 0!"); }
+ 
+Fraction Fraction::operator*(long _num) { return *this * Fraction{ _num }; }
+Fraction Fraction::operator-(long _num) { return *this - Fraction{ _num }; }
+Fraction Fraction::operator+(long _num) { return *this + Fraction{ _num }; }
+Fraction Fraction::operator/(long _num) { if (_num) return *this + Fraction{ _num }; else throw("Dividing by 0!"); }
+
 void Fraction::print() const {
 //	_preprint();
 	if (this->integral) cout << this->integral;
@@ -219,3 +264,48 @@ void Fraction::EuclidAlgorighm() {
 //		this->numerator = abs(this->numerator);
 //	}
 //}
+
+bool operator==(int _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
+bool operator==(float _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
+bool operator==(double _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
+bool operator==(long _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
+bool operator!=(int _val, const Fraction& _fVal) { return Fraction{ _val } != _fVal; }
+bool operator!=(float _val, const Fraction& _fVal) { return Fraction{ _val } != _fVal; }
+bool operator!=(double _val, const Fraction& _fVal) { return Fraction{ _val } != _fVal; }
+bool operator!=(long _val, const Fraction& _fVal) { return Fraction{ _val } != _fVal; }
+bool operator>(int _val, const Fraction& _fVal) { return Fraction{ _val } > _fVal; }
+bool operator>(float _val, const Fraction& _fVal) { return Fraction{ _val } > _fVal; }
+bool operator>(double _val, const Fraction& _fVal) { return Fraction{ _val } > _fVal; }
+bool operator>(long _val, const Fraction& _fVal) { return Fraction{ _val } > _fVal; }
+bool operator<(int _val, const Fraction& _fVal) { return Fraction{ _val } < _fVal; }
+bool operator<(float _val, const Fraction& _fVal) { return Fraction{ _val } < _fVal; }
+bool operator<(double _val, const Fraction& _fVal) { return Fraction{ _val } < _fVal; }
+bool operator<(long _val, const Fraction& _fVal) { return Fraction{ _val } < _fVal; }
+bool operator>=(float _val, const Fraction& _fVal) { return Fraction{ _val } >= _fVal; }
+bool operator>=(double _val, const Fraction& _fVal) { return Fraction{ _val } >= _fVal; }
+bool operator>=(long _val, const Fraction& _fVal) { return Fraction{ _val } >= _fVal; }
+bool operator>=(int _val, const Fraction& _fVal) { return Fraction{ _val } >= _fVal; }
+bool operator<=(float _val, const Fraction& _fVal) { return Fraction{ _val } <= _fVal; }
+bool operator<=(double _val, const Fraction& _fVal) { return Fraction{ _val } <= _fVal; }
+bool operator<=(long _val, const Fraction& _fVal) { return Fraction{ _val } <= _fVal; }
+bool operator<=(int _val, const Fraction& _fVal) { return Fraction{ _val } <= _fVal; }
+
+Fraction operator+(int _num, const Fraction& _f) { return Fraction{ _num } + _f; }
+Fraction operator-(int _num, const Fraction& _f) { return Fraction{ _num } - _f; }
+Fraction operator*(int _num, const Fraction& _f) { return Fraction{ _num } *_f; }
+Fraction operator/(int _num, const Fraction& _f) { if (_f != 0) return Fraction{ _num } / _f; else throw("Dividing by 0!"); }
+
+Fraction operator+(float _num, const Fraction& _f) { return Fraction{ _num } + _f; }
+Fraction operator-(float _num, const Fraction& _f) { return Fraction{ _num } - _f; }
+Fraction operator*(float _num, const Fraction& _f) { return Fraction{ _num } *_f; }
+Fraction operator/(float _num, const Fraction& _f) { if (_f != 0) return Fraction{ _num } / _f; else throw("Dividing by 0!"); }
+
+Fraction operator+(double _num, const Fraction& _f) { return Fraction{ _num } + _f; }
+Fraction operator-(double _num, const Fraction& _f) { return Fraction{ _num } - _f; }
+Fraction operator*(double _num, const Fraction& _f) { return Fraction{ _num } *_f; }
+Fraction operator/(double _num, const Fraction& _f) { if (_f != 0) return Fraction{ _num } / _f; else throw("Dividing by 0!"); }
+
+Fraction operator*(long _num, const Fraction& _f) { return Fraction{ _num } + _f; }
+Fraction operator-(long _num, const Fraction& _f) { return Fraction{ _num } - _f; }
+Fraction operator+(long _num, const Fraction& _f) { return Fraction{ _num } *_f; }
+Fraction operator/(long _num, const Fraction& _f) { if (_f != 0) return Fraction{ _num } / _f; else throw("Dividing by 0!"); }
