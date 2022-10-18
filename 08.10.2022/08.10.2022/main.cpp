@@ -21,10 +21,10 @@ int main() {
 	deleteDublicate(_arr, N);
 	printArray(_arr, N, "After deleting dublicate");
 	std::cout << "Max sum = " << maxSum(_arr, N)<<endl;
-	printArray(_arr, N, "After sorting by Max");
 	sortArray(_arr, N, Max<int>);
-	printArray(_arr, N, "After sorting by Min");
+	printArray(_arr, N, "After sorting by Max");
 	sortArray(_arr, N, Min<int>);
+	printArray(_arr, N, "After sorting by Min");
 	return 0;
 }
 
@@ -77,9 +77,9 @@ void printArray(T*& _arr, const size_t& _s, string msg)
 {
 	auto _begin{ _arr };
 	auto _end{ _arr + _s };
-	cout << msg << " -> ";
+	cout << msg << " ->\t";
 	while (_begin != _end) {
-		std::cout << "\t" << *_begin;
+		std::cout << "  " << *_begin;
 		++_begin;
 	}
 	cout << endl;
@@ -88,32 +88,38 @@ void printArray(T*& _arr, const size_t& _s, string msg)
 template<typename T>
 void deleteDublicate(T*& _arr, size_t& _s)
 {
-	auto _begin{ _arr };
-	auto _end{ _arr + _s };
-	auto it{ _arr };
-	while (_begin != _end) {
-		it = next(_begin);
-		while (it != _end) {
-			if (*it == *_begin) {
-				while (*it == *(_end - 1))
-					--_end;
-				std::swap(*it, *_end);
-			}
-			++it;
-		}
-		++_begin;
-	}
-	_s = _end - _arr;
 	T* newArr{ new T[_s] };
-	_begin = _arr;
-	it = newArr;
-	while (_begin != _end) {
-		*it = *_begin;
+	size_t newArrSize{ 0 };
+	auto it_new{ newArr };
+	auto it{ _arr };
+	if (_s) {
+		*it_new = *it;
 		++it;
-		++_begin;
+		++newArrSize;
+	}
+	while (it != _arr + _s) {
+		it_new = newArr;
+		while (it_new != newArr + newArrSize) {
+			if (*it_new == *it) break; 
+			++it_new;
+		}
+		if (it_new == newArr + newArrSize) {
+			*it_new = *it;
+			++newArrSize;
+		}
+		++it;
 	}
 	delete[] _arr;
-	_arr = newArr;
+	_s = newArrSize;
+	_arr = new T[_s];
+	it_new = newArr;
+	it = _arr;
+	while (it_new != newArr + _s) {
+		*it = *it_new;
+		++it;
+		++it_new;
+	}
+	delete[] newArr;
 	newArr = nullptr;
 }
 
