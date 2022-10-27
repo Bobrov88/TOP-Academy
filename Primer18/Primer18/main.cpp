@@ -41,11 +41,19 @@ public:
 			"of range!");
 		return medals[idx];
 	}
+
+	const char* maxMedal() const {
+		if (medals[GOLD] > medals[SILVER]) {
+			if (medals[GOLD] > medals[BRONZE]) return "GOLD\n";
+		}
+		else if (medals[SILVER] > medals[BRONZE]) return "SILVER\n";
+		return "BRONZE\n";
+	};
 };
+
 class MedalsTable
 {
 public:
-	//static const int maxSize{ 10 };
 	friend std::ostream& operator<<(std::ostream& os, const MedalsTable& mt);
 private:
 	MedalRow *medalRows;
@@ -116,7 +124,6 @@ public:
 		int idx{ findCountry(country) };
 		if (idx == -1)
 		{
-		//	assert("Table is FULL!");
 			idx = size++;
 			pushBack(country);
 		}
@@ -130,6 +137,11 @@ public:
 			"table");
 		return medalRows[idx];
 	}
+
+	const char* operator()(const char* country) {
+		return medalRows[findCountry(country)].maxMedal();
+	}
+
 };
 
 std::ostream& operator<<(std::ostream& os, const MedalsTable& mt) {
@@ -163,14 +175,14 @@ int main()
 	mt1["POL"][MedalRow::GOLD] = 4;
 	mt1["POL"][MedalRow::SILVER] = 2;
 	std::cout << mt1;
-	// создаем константную копию таблицы №1
 	std::cout << "\nMedals table #2:\n";
+	
 	const MedalsTable mt2{ mt1 };
 	std::cout << mt2;
-	// раскомментировав следующую строку можно протестировать
-	// проверку отсутствия страны в константной таблице
-	// медалей
-	// программа аварийно завершиться, что нормально!
-	// mt2["SLO"].print();
+
+	std::cout << "Ukraine - "<<mt1("UKR");
+	std::cout << "Hungary - "<<mt1("HUN");
+	std::cout << "Poland - "<<mt1("POL");
+
 	return 0;
 }
