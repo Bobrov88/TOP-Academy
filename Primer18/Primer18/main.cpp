@@ -1,9 +1,12 @@
 #include <iostream>
 #include <cassert>
+#include <fstream>
+
 class MedalRow
 {
 	char country[4];
 	int medals[3];
+	friend std::ostream& operator<<(std::ostream& os, const MedalRow& mr);
 public:
 	static const int GOLD{ 0 };
 	static const int SILVER{ 1 };
@@ -38,21 +41,12 @@ public:
 			"of range!");
 		return medals[idx];
 	}
-	void print()const
-	{
-		std::cout << '[' << country << "]-( ";
-		for (int i{ 0 }; i < 3; ++i)
-		{
-			std::cout << medals[i];
-			if (i < 2) { std::cout << '\t'; }
-		}
-		std::cout << " )\n";
-	}
 };
 class MedalsTable
 {
 public:
 	//static const int maxSize{ 10 };
+	friend std::ostream& operator<<(std::ostream& os, const MedalsTable& mt);
 private:
 	MedalRow *medalRows;
 	int size;
@@ -71,8 +65,11 @@ private:
 
 	void pushBack(const char* country) {
 		MedalRow* tempArr = new MedalRow[size];
-		for (int i{ 0 }; i < size - 1; ++i)
+		for (int i{ 0 }; i < size - 1; ++i) {
 			tempArr[i].setCountry(medalRows[i].getCountry());
+			for (int j{ 0 }; j < 3; ++j)
+				tempArr[i][j] = medalRows[i][j];
+		}
 		tempArr[size - 1].setCountry(country);
 		delete[]medalRows;
 		medalRows = tempArr;
@@ -83,10 +80,13 @@ public:
 	MedalsTable() : size{ 0 }, medalRows{ nullptr } {};
 	MedalsTable(int _size) : size{ _size }, medalRows { new MedalRow[_size] } {}
 	MedalsTable(const MedalsTable& other) : size{ other.size }, medalRows{ new MedalRow[other.size] } {
-		for (int i{ 0 }; i < other.size; i++)
-
-
+		for (int i{ 0 }; i < other.size; ++i) {
+			medalRows[i].setCountry(other.medalRows[i].getCountry());
+			for (int j{ 0 }; j < 3; ++j)
+				medalRows[i][j] = other.medalRows[i][j];
+		}
 	}
+
 	MedalsTable(MedalsTable&& other) noexcept : size{ other.size } {
 		other.size = 0;
 		medalRows = other.medalRows;
@@ -96,8 +96,11 @@ public:
 		delete[]medalRows;
 		size = other.size;
 		medalRows = new MedalRow[size];
-		for (int i{ 0 }; i < size; ++i)
+		for (int i{ 0 }; i < other.size; ++i) {
 			medalRows[i].setCountry(other.medalRows[i].getCountry());
+			for (int j{ 0 }; j < 3; ++j)
+				medalRows[i][j] = other.medalRows[i][j];
+		}
 		return *this;
 	}
 	MedalsTable& operator=(MedalsTable&& other) noexcept {
@@ -127,14 +130,28 @@ public:
 			"table");
 		return medalRows[idx];
 	}
-	void print()const
-	{
-		for (int i{ 0 }; i < size; ++i)
-		{
-			medalRows[i].print();
-		}
-	}
 };
+
+std::ostream& operator<<(std::ostream& os, const MedalsTable& mt) {
+	for (int i{ 0 }; i < mt.size; ++i)
+	{
+		std::cout << mt.medalRows[i];
+	}
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const MedalRow& mr) {
+	std::cout << '[' << mr.country << "]-( ";
+	for (int i{ 0 }; i < 3; ++i)
+	{
+		std::cout << mr.medals[i];
+		if (i < 2) { std::cout << '\t'; }
+	}
+	std::cout << " )\n";
+	return os;
+}
+
+
 int main()
 {
 	MedalsTable mt1;
@@ -145,11 +162,11 @@ int main()
 	mt1["HUN"][MedalRow::GOLD] = 7;
 	mt1["POL"][MedalRow::GOLD] = 4;
 	mt1["POL"][MedalRow::SILVER] = 2;
-	mt1.print();
+	std::cout << mt1;
 	// создаем константную копию таблицы №1
 	std::cout << "\nMedals table #2:\n";
 	const MedalsTable mt2{ mt1 };
-	mt2.print();
+	std::cout << mt2;
 	// раскомментировав следующую строку можно протестировать
 	// проверку отсутствия страны в константной таблице
 	// медалей
