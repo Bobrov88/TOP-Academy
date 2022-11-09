@@ -50,7 +50,7 @@ int main() {
 	cout << endl;
 	(A + 3).print();
 	(3.2 * A).print();
-	(A + DB).print();
+	(LL + DB).print();
 
 		return 0;
 

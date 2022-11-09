@@ -229,7 +229,6 @@ Fraction Fraction::operator+(long _num) { return *this + Fraction{ _num }; }
 Fraction Fraction::operator/(long _num) { if (_num) return *this + Fraction{ _num }; else throw("Dividing by 0!"); }
 
 void Fraction::print() const {
-//	_preprint();
 	if (this->integral) cout << this->integral;
 	if (this->numerator)
 		cout << "[" << this->numerator
@@ -250,20 +249,6 @@ void Fraction::EuclidAlgorighm() {
 	this->numerator /= numerator;
 	this->denominator /= numerator;
 }
-
-//void Fraction::_preprint() {
-//	if (this->denominator < 0) {
-//		this->denominator *= -1;
-//		this->numerator *= -1;
-//	}
-//	if (this->integral != 0) {
-//		if (this->numerator < 0) {
-//			this->integral *= -1;
-//			this->numerator *= -1;
-//		}
-//		this->numerator = abs(this->numerator);
-//	}
-//}
 
 bool operator==(int _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
 bool operator==(float _val, const Fraction& _fVal) { return Fraction{ _val } == _fVal; }
