@@ -1,0 +1,19 @@
+add createProcess creating_new_process 2022-11-03 create
+add createFile creating_new_file 2019-10-02 create
+add createFolder creating_new_folder 2021-02-06 create
+add createSound creating_any_sound 2020-06-01 create
+add openProcess opening_new_process 2021-2606-11 open
+add openFile opening_new_file 2019-10-09 open
+add openFolder opening_new_folder 2020-06-06 open
+add openSound opening_any_sound 2018-04-11 open
+add openSound opening_any_sound 2020-03-12 open
+done createfile
+update openfolder
+delete createprocess
+update openile
+add savefile saving_file_as 2021-05-03 save
+add zipfile compressing_file 2019-10-10 save
+select *
+update createpr
+select * where data > "folder"
+select * where title like "file" and date>"2019-10-05" and category ="save"
